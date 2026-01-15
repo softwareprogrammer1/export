@@ -1,278 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ren Exports - Premium Products to Global Markets</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#10b981">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/parakeet/192/10b981/globe.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        /* Base Mobile Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: var(--text-main);
+            background-color: #f8fafc;
+            overflow-x: hidden;
+            padding-bottom: var(--safe-area-inset-bottom);
         }
-        
+
+        h1,
+        h2,
+        h3,
+        .company-logo {
+            font-family: 'Outfit', sans-serif;
+            word-wrap: break-word;
+        }
+
         .container {
-            max-width: 800px;
+            width: 100%;
+            padding: 0 20px;
             margin: 0 auto;
-            background: white;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            position: relative;
         }
-        
+
         .page {
             min-height: 100vh;
-            padding: 40px;
+            padding: 60px 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            page-break-after: always;
-        }
-        
-        .cover-page {
-            background: linear-gradient(135deg, #1e3c72 0%, #2E8B57 100%);
-            color: white;
-            text-align: center;
             position: relative;
         }
-        
-        .cover-page::before {
-            content: '';
-            position: absolute;
+
+        /* Mesh Gradient Background */
+        .mesh-bg {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
-            opacity: 0.3;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #f8fafc;
+            background-image:
+                radial-gradient(at 0% 0%, hsla(161, 72%, 48%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(217, 91%, 60%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(32, 98%, 50%, 0.05) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(222, 47%, 11%, 0.05) 0px, transparent 50%);
         }
-        
-        .cover-content {
-            position: relative;
-            z-index: 1;
+
+        /* Cover Page */
+        .cover-page {
+            text-align: center;
+            color: var(--secondary);
         }
-        
+
         .company-logo {
-            font-size: 4rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3rem;
+            /* Small for mobile */
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
-        
+
         .tagline {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--text-light);
             margin-bottom: 30px;
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info-pill {
+            background: var(--secondary);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.15);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .contact-info-pill div {
+            margin: 5px 0;
+            font-size: 1.1rem;
             opacity: 0.9;
         }
-        
-        .location {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0.8;
-        }
-        
-        .contact-info {
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-        
+
+        /* Headings */
         h1 {
-            color: #2E8B57;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 35px;
             text-align: center;
-            border-bottom: 3px solid #2E8B57;
-            padding-bottom: 15px;
+            position: relative;
         }
-        
-        h2 {
-            color: #228B22;
-            font-size: 2rem;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            margin: 12px auto 0;
+            border-radius: 2px;
         }
-        
-        h3 {
-            color: #2E8B57;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+
+        /* Cards & Grids */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .icon {
-            margin-right: 15px;
-            font-size: 1.5rem;
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12);
         }
-        
-        .highlight-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 25px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #2E8B57;
-        }
-        
+
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr;
+            /* Single column for mobile */
             gap: 20px;
-            margin: 20px 0;
+            margin: 30px 0;
         }
-        
+
         .product-card {
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-top: 4px solid #2E8B57;
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
-        
+
+        .product-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);
+        }
+
+        .product-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+        }
+
+        /* Stats */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
+            grid-template-columns: 1fr;
+            /* Single column for mobile */
+            gap: 16px;
+            margin: 35px 0;
         }
-        
+
         .stat-card {
-            background: #2E8B57;
+            background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
             color: white;
             padding: 25px;
-            border-radius: 10px;
+            border-radius: 16px;
             text-align: center;
         }
-        
+
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
         }
-        
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        
-        .usp-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .usp-list li {
-            background: #f8f9fa;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #2E8B57;
-            position: relative;
-        }
-        
-        .usp-list li::before {
-            content: '✓';
-            color: #2E8B57;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        .market-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .market-item {
-            background: #2E8B57;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-        
-        .pricing-table {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
-        .pricing-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #dee2e6;
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, #2E8B57 0%, #228B22 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-            border-radius: 10px;
-            margin: 30px 0;
-        }
-        
-        .btn {
+
+        /* Forms & Buttons */
+        .quote-form {
             background: white;
-            color: #2E8B57;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
+            padding: 40px;
+            border-radius: 24px;
+            max-width: 600px;
+            margin: 40px auto;
+            box-shadow: var(--shadow);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #f0fdf4;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            /* Tappable area */
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
             text-decoration: none;
-            display: inline-block;
-            margin: 10px;
+            width: 100%;
+            /* Full width for mobile buttons */
+            margin-bottom: 12px;
+            font-size: 1rem;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
-        @media (max-width: 768px) {
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Large Screen Enhancements (Progressive) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 900px;
+                padding: 0;
+            }
+
             .page {
-                padding: 20px;
+                padding: 100px 0;
             }
-            
+
             .company-logo {
-                font-size: 2.5rem;
+                font-size: 5rem;
             }
-            
+
+            .tagline {
+                font-size: 1.75rem;
+            }
+
             h1 {
-                font-size: 2rem;
+                font-size: 3rem;
             }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
+
             .product-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+
+            .btn {
+                width: auto;
+                margin-right: 12px;
+            }
+
+            .glass-card {
+                padding: 40px;
             }
         }
-        
-        .fade-in {
-            animation: fadeIn 1s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        @media (min-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
     </style>
+
 </head>
+
 <body>
+    <div class="mesh-bg"></div>
     <div class="container">
         <!-- Cover Page -->
         <div class="page cover-page">
-            <div class="cover-content fade-in">
+            <div class="animate-on-scroll">
+                <div class="location-badge">📍 Singapore, Asia</div>
                 <div class="company-logo">REN EXPORTS</div>
                 <div class="tagline">Premium Products to Global Markets</div>
-                <div class="location">📍 Singapore, Asia</div>
-                <div class="contact-info">
+                <div class="contact-info-pill">
                     <div><strong>Merchant Exporter</strong></div>
                     <div>🌍 Trading Excellence Since Inception</div>
                     <div>🚀 Your Gateway to Superior Quality</div>
@@ -282,13 +420,15 @@
 
         <!-- About Us -->
         <div class="page">
-            <h1>🏢 About REN Exports</h1>
-            <div class="highlight-box fade-in">
-                <h3>Who We Are</h3>
-                <p>Ren Exports is a Singapore-based merchant exporter specializing in premium products for global markets. We bridge the gap between World's finest producers and international buyers, ensuring quality, reliability, and competitive pricing.</p>
+            <h1 class="animate-on-scroll">🏢 About REN Exports</h1>
+            <div class="glass-card animate-on-scroll">
+                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">Who We Are</h3>
+                <p>Ren Exports is a Singapore-based merchant exporter specializing in premium products for global
+                    markets. We bridge the gap between World's finest producers and international buyers, ensuring
+                    quality, reliability, and competitive pricing.</p>
             </div>
-            
-            <div class="stats-grid">
+
+            <div class="stats-grid animate-on-scroll">
                 <div class="stat-card">
                     <div class="stat-number">5+</div>
                     <div class="stat-label">Product Categories</div>
@@ -302,69 +442,86 @@
                     <div class="stat-label">Quality Assurance</div>
                 </div>
             </div>
-            
-            <div class="highlight-box">
-                <h3>Our Mission</h3>
-                <p>To be the most trusted merchant exporter of good products globally, delivering exceptional quality and value while fostering long-term partnerships with our clients worldwide.</p>
+
+            <div class="glass-card animate-on-scroll">
+                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">Our Mission</h3>
+                <p>To be the most trusted merchant exporter of good products globally, delivering exceptional quality
+                    and value while fostering long-term partnerships with our clients worldwide.</p>
             </div>
         </div>
 
         <!-- Core Strengths -->
         <div class="page">
-            <h1>💪 Our Core Strengths</h1>
-            
-            <ul class="usp-list fade-in">
-                <li><strong>Merchant Export Expertise:</strong> Deep understanding of global trade requirements and regulations</li>
-                <li><strong>Quality Sourcing Network:</strong> Direct relationships with premium producers across Asia</li>
-                <li><strong>Custom Packaging:</strong> Sorting, grading, and packaging as per importer requirements</li>
-                <li><strong>Certificate Management:</strong> Complete documentation and certification support</li>
-                <li><strong>Flexible Pricing:</strong> Ex-works, FOB, CIF, and Door-to-Door delivery options</li>
-                <li><strong>Farm-Fresh Guarantee:</strong> Direct from farm to export, ensuring maximum freshness</li>
-                <li><strong>Value Addition:</strong> Processing capabilities for Western market preferences</li>
-                <li><strong>Multi-Country Network:</strong> Supply chain partnerships in Vietnam and Thailand</li>
-            </ul>
-            
-            <div class="cta-section">
-                <h3>🎯 Why Choose Ren Exports?</h3>
-                <p>We don't just export products; we export trust, quality, and partnership. Our commitment to excellence ensures your business success in competitive global markets.</p>
+            <h1 class="animate-on-scroll">💪 Our Core Strengths</h1>
+
+            <div class="glass-card animate-on-scroll">
+                <ul class="usp-list">
+                    <li style="margin-bottom: 15px; padding-left: 20px; border-left: 4px solid var(--primary);">
+                        <strong>Merchant Export Expertise:</strong> Deep understanding of global trade requirements and
+                        regulations
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 20px; border-left: 4px solid var(--primary);">
+                        <strong>Quality Sourcing Network:</strong> Direct relationships with premium producers across
+                        Asia
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 20px; border-left: 4px solid var(--primary);">
+                        <strong>Custom Packaging:</strong> Sorting, grading, and packaging as per importer requirements
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 20px; border-left: 4px solid var(--primary);">
+                        <strong>Certificate Management:</strong> Complete documentation and certification support
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 20px; border-left: 4px solid var(--primary);">
+                        <strong>Flexible Pricing:</strong> Ex-works, FOB, CIF, and Door-to-Door delivery options
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 20px; border-left: 4px solid var(--primary);">
+                        <strong>Farm-Fresh Guarantee:</strong> Direct from farm to export, ensuring maximum freshness
+                    </li>
+                    <li><strong>Value Addition:</strong> Processing capabilities for Western market preferences</li>
+                    <li><strong>Multi-Country Network:</strong> Supply chain partnerships in Vietnam and Thailand</li>
+                </ul>
+            </div>
+
+            <div class="glass-card animate-on-scroll" style="background: var(--primary); color: white;">
+                <h3 style="color: white; margin-bottom: 15px;">🎯 Why Choose Ren Exports?</h3>
+                <p>We don't just export products; we export trust, quality, and partnership. Our commitment to
+                    excellence ensures your business success in competitive global markets.</p>
             </div>
         </div>
 
         <!-- Agricultural Products -->
         <div class="page">
-            <h1>🌱 Agricultural Products - Fresh Air Shipments</h1>
-            
-            <div class="highlight-box">
-                <h3>✈️ Weekly Air Shipments Program</h3>
-                <p><strong>Current Active Markets:</strong> UK, Canada, Dubai (UAE) - Regular weekly deliveries ensuring maximum freshness</p>
-                <p><strong>Daily Supply Capacity:</strong> 3-20 MT based on buyer requirements and cargo space availability</p>
+            <h1 class="animate-on-scroll">🌱 Agricultural Products - Fresh Air Shipments</h1>
+
+            <div class="glass-card animate-on-scroll">
+                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">✈️ Weekly Air Shipments Program</h3>
+                <p><strong>Current Active Markets:</strong> UK, Canada, Dubai (UAE) - Regular weekly deliveries ensuring
+                    maximum freshness</p>
+                <p><strong>Daily Supply Capacity:</strong> 3-20 MT based on buyer requirements and cargo space
+                    availability</p>
             </div>
-            
-            <div class="product-grid">
+
+            <div class="product-grid animate-on-scroll">
                 <div class="product-card">
                     <h3>🧅 Onion & Shallots</h3>
                     <p><strong>MOQ:</strong> 2-3 MT per shipment</p>
-                    <p><strong>Markets:</strong> UK, Canada, UAE</p>
                     <p><strong>Frequency:</strong> Weekly air cargo</p>
                     <p><strong>Quality:</strong> Fresh, sorted, export grade</p>
                 </div>
-                
+
                 <div class="product-card">
                     <h3>🥒 Drumstick (Moringa)</h3>
                     <p><strong>Premium Quality:</strong> Fresh harvested</p>
-                    <p><strong>Air Freight:</strong> Maximum freshness retention</p>
-                    <p><strong>Packaging:</strong> Temperature controlled</p>
-                    <p><strong>Shelf Life:</strong> Extended through proper handling</p>
+                    <p><strong>Air Freight:</strong> Maximum freshness</p>
+                    <p><strong>Packaging:</strong> Temp controlled</p>
                 </div>
-                
+
                 <div class="product-card">
                     <h3>🍇 Amla (Gooseberry)</h3>
-                    <p><strong>Nutritional:</strong> High Vitamin C content</p>
-                    <p><strong>Quality:</strong> Premium grade selection</p>
-                    <p><strong>Markets:</strong> Growing demand globally</p>
-                    <p><strong>Processing:</strong> Fresh or value-added</p>
+                    <p><strong>Nutritional:</strong> High Vitamin C</p>
+                    <p><strong>Quality:</strong> Premium grade</p>
+                    <p><strong>Markets:</strong> Global demand</p>
                 </div>
-                
+
                 <div class="product-card">
                     <h3>🥬 Mixed Vegetables</h3>
                     <p><strong>Variety:</strong> Based on seasonal availability</p>
@@ -372,15 +529,14 @@
                     <p><strong>Custom Orders:</strong> Buyer-specific requirements</p>
                     <p><strong>Quality:</strong> Farm-fresh guarantee</p>
                 </div>
-                
+
                 <div class="product-card">
                     <h3>🍃 Banana Leaves</h3>
                     <p><strong>Markets:</strong> Canada, UK, UAE</p>
-                    <p><strong>Quality:</strong> Fresh, natural, eco-friendly</p>
-                    <p><strong>Uses:</strong> Food packaging, traditional cooking</p>
-                    <p><strong>Sizes:</strong> Various sizes available</p>
+                    <p><strong>Quality:</strong> Fresh, natural</p>
+                    <p><strong>Uses:</strong> Food packing</p>
                 </div>
-                
+
                 <div class="product-card">
                     <h3>🍎 Fresh Fruits</h3>
                     <p><strong>Varieties:</strong> Seasonal and year-round</p>
@@ -389,7 +545,7 @@
                     <p><strong>Markets:</strong> UK, Canada, UAE</p>
                 </div>
             </div>
-            
+
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">3-20</div>
@@ -408,89 +564,71 @@
 
         <!-- Market-Specific Strategy -->
         <div class="page">
-            <h1>🎯 Target Market Strategy - Dehydrated Products</h1>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>🇺🇸 United States Market</h3>
-                    <p><strong>Focus Products:</strong> Onion powder for snack industry</p>
-                    <p><strong>Health Segment:</strong> Moringa powder for health stores</p>
-                    <p><strong>Logistics Advantage:</strong> Mumbai shipments to LA/Long Beach</p>
-                    <p><strong>Time Saving:</strong> 5-7 days faster than normal route</p>
-                    <p><strong>Target Industries:</strong> Food processing, nutraceuticals</p>
+            <h1 class="animate-on-scroll">🎯 Target Market Strategy</h1>
+
+            <div class="product-grid animate-on-scroll">
+                <div class="glass-card">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 15px;">🇺🇸 United States Market</h3>
+                    <p><strong>Focus:</strong> Onion powder for snack industry</p>
+                    <p><strong>Health:</strong> Moringa powder for wellness</p>
+                    <p><strong>Logistics:</strong> Mumbai to LA (Time saving route)</p>
                 </div>
-                
-                <div class="product-card">
-                    <h3>🇪🇺 European Union Markets</h3>
-                    <p><strong>Focus Products:</strong> Organic tomato powder, dill weed</p>
+
+                <div class="glass-card">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 15px;">🇪🇺 European Union</h3>
+                    <p><strong>Focus:</strong> Organic tomato powder, dill weed</p>
                     <p><strong>Certifications:</strong> EU Organic, REACH compliant</p>
-                    <p><strong>Best Route:</strong> Singapore Port advantage</p>
-                    <p><strong>Premium Segment:</strong> Organic and health foods</p>
-                    <p><strong>Target Countries:</strong> Germany, Netherlands, UK</p>
+                    <p><strong>Route:</strong> Singapore Port advantage</p>
                 </div>
-                
-                <div class="product-card">
-                    <h3>🇸🇬 Singapore Hub Strategy</h3>
-                    <p><strong>Key Advantage:</strong> Duty-free re-exports to ASEAN</p>
-                    <p><strong>Packaging:</strong> Retail-ready packs available</p>
-                    <p><strong>Transit Time:</strong> 10-12 days from Singapore</p>
-                    <p><strong>Re-export Markets:</strong> Malaysia, Thailand, Philippines</p>
-                    <p><strong>Value Addition:</strong> Private labeling services</p>
-                </div>
-                
-                <div class="product-card">
-                    <h3>🌍 Cross-Trading Opportunities</h3>
-                    <p><strong>Triangle Shipments:</strong> Singapore orders → US/EU delivery</p>
-                    <p><strong>Documentation:</strong> Switch bills, flexible invoicing</p>
-                    <p><strong>Agent Network:</strong> Support for US/Europe operations</p>
-                    <p><strong>Bulk Orders:</strong> 100+ MT monthly capacity</p>
-                    <p><strong>Customization:</strong> Market-specific packaging</p>
+
+                <div class="glass-card">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 15px;">🇸🇬 Singapore Hub</h3>
+                    <p><strong>Advantage:</strong> Duty-free re-exports to ASEAN</p>
+                    <p><strong>Packaging:</strong> Retail-ready packs</p>
+                    <p><strong>Network:</strong> Malaysia, Thailand, Philippines</p>
                 </div>
             </div>
-            
-            <div class="highlight-box">
-                <h3>🏆 Why Partner With Ren Exports for Dehydrated Products?</h3>
-                <ul class="usp-list">
-                    <li><strong>Dual-Port Advantage:</strong> Optimized shipping routes from Singapore & Malaysia</li>
-                    <li><strong>Quality Assurance:</strong> European-standard processing with full traceability</li>
-                    <li><strong>Packaging Flexibility:</strong> Bulk, retail, private label options</li>
-                    <li><strong>Guaranteed Supply:</strong> 100 MT/month with scalability to 200 MT</li>
-                    <li><strong>Certification Support:</strong> Tailored to buyer markets (US/EU/SG)</li>
-                    <li><strong>Container Optimization:</strong> FCL/LCL options with humidity control</li>
+
+            <div class="glass-card animate-on-scroll">
+                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">🏆 Partner Advantages</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 10px;">✅ Dual-Port shipping routes</li>
+                    <li style="margin-bottom: 10px;">✅ European-standard processing</li>
+                    <li style="margin-bottom: 10px;">✅ Private label options available</li>
                 </ul>
             </div>
         </div>
 
         <!-- Food & Commodity Products -->
         <div class="page">
-            <h1>🌾 Additional Food & Commodity Products</h1>
-            
-            <div class="product-grid">
-                <div class="product-card">
+            <h1 class="animate-on-scroll">🌾 Additional Food & Commodity Products</h1>
+
+            <div class="product-grid animate-on-scroll">
+                <div class="glass-card">
                     <h3>🌾 Millets</h3>
                     <p>• Raw Millets (All varieties)</p>
                     <p>• Millet-based Pasta</p>
                     <p>• Millet Noodles</p>
                     <p>• Processed Millet Products</p>
                 </div>
-                
-                <div class="product-card">
+
+                <div class="glass-card">
                     <h3>🥜 Cashews</h3>
                     <p>• Premium Grade Cashews</p>
                     <p>• Various Sizes & Grades</p>
                     <p>• Processed & Raw</p>
                     <p>• Export Quality Standards</p>
                 </div>
-                
-                <div class="product-card">
+
+                <div class="glass-card">
                     <h3>🌴 Palm Products</h3>
                     <p>• Palm Jaggery</p>
                     <p>• Organic Brown Sugar</p>
                     <p>• Sesame Products</p>
                     <p>• Festival Products</p>
                 </div>
-                
-                <div class="product-card">
+
+                <div class="glass-card">
                     <h3>🙏 Devotional Pooja Products</h3>
                     <p>• Incense Sticks (Agarbatti)</p>
                     <p>• Camphor & Dhoop</p>
@@ -499,8 +637,8 @@
                     <p>• Traditional Brass Items</p>
                     <p>• Kumkum & Turmeric Powder</p>
                 </div>
-                
-                <div class="product-card">
+
+                <div class="glass-card">
                     <h3>🎭 Festival & Religious Items</h3>
                     <p>• Decorative Items</p>
                     <p>• Religious Figurines</p>
@@ -512,186 +650,84 @@
             </div>
         </div>
 
-        <!-- Cosmetic Products -->
+        <!-- Leather & Regional Network -->
         <div class="page">
-            <h1>💄 Premium Cosmetic Products</h1>
-            
-            <div class="highlight-box">
-                <h3>🏭 Manufacturing Excellence</h3>
-                <p>Our state-of-the-art cosmetic manufacturing units produce premium skincare products that meet international quality standards.</p>
-            </div>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>🧼 Premium Soaps</h3>
-                    <p>• Natural & Organic variants</p>
-                    <p>• Ayurvedic formulations</p>
-                    <p>• Custom fragrances</p>
-                    <p>• Private labeling available</p>
-                </div>
-                
-                <div class="product-card">
-                    <h3>💆‍♀️ Hair Care</h3>
-                    <p>• Traditional Hair Oils</p>
-                    <p>• Natural Shampoos</p>
-                    <p>• Herbal Formulations</p>
-                    <p>• Export Quality Standards</p>
-                </div>
-            </div>
-            
-            <div class="market-list">
-                <div class="market-item">🇬🇧 United Kingdom</div>
-                <div class="market-item">🇨🇦 Canada</div>
-                <div class="market-item">🇦🇪 UAE (Dubai)</div>
-                <div class="market-item">🇸🇬 Singapore</div>
-                <div class="market-item">🇺🇸 USA</div>
-                <div class="market-item">🇪🇺 Europe</div>
-            </div>
-        </div>
+            <h1 class="animate-on-scroll">🌏 Global Supply Network</h1>
 
-        <!-- Leather Products -->
-        <div class="page">
-            <h1>👜 Leather Products Division</h1>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>🐄 Raw Leather</h3>
+            <div class="product-grid animate-on-scroll">
+                <div class="glass-card">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 15px;">👜 Leather Division</h3>
                     <p>• Premium Quality Hides</p>
-                    <p>• Various Animal Sources</p>
-                    <p>• Processed & Unprocessed</p>
-                    <p>• Bulk Quantities Available</p>
+                    <p>• Fashion Industry Grade Finish</p>
+                    <p>• Serving Europe, Korea & China</p>
                 </div>
-                
-                <div class="product-card">
-                    <h3>👞 Finished Leather</h3>
-                    <p>• Ready for Manufacturing</p>
-                    <p>• Fashion Industry Grade</p>
-                    <p>• Custom Processing</p>
-                    <p>• Brand Quality Standards</p>
-                </div>
-            </div>
-            
-            <div class="highlight-box">
-                <h3>🎯 Target Markets</h3>
-                <p><strong>High Demand Markets:</strong> Europe, Korea, and China fashion industries rely on our premium leather products for luxury goods manufacturing.</p>
-            </div>
-            
-            <div class="market-list">
-                <div class="market-item">🇪🇺 European Fashion</div>
-                <div class="market-item">🇰🇷 Korean Brands</div>
-                <div class="market-item">🇨🇳 Chinese Manufacturers</div>
-            </div>
-        </div>
 
-        <!-- Regional Network -->
-        <div class="page">
-            <h1>🌏 Regional Supply Network</h1>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>🇻🇳 Vietnam Network</h3>
+                <div class="glass-card">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 15px;">🇻🇳 Vietnam Network</h3>
                     <p>• Fresh Fruits & Vegetables</p>
                     <p>• Coconut Products</p>
-                    <p>• Tender Coconut</p>
                     <p>• Agricultural Commodities</p>
                 </div>
-                
-                <div class="product-card">
-                    <h3>🇹🇭 Thailand Network</h3>
+
+                <div class="glass-card">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 15px;">🇹🇭 Thailand Network</h3>
                     <p>• Tropical Fruits</p>
                     <p>• Coconut Varieties</p>
-                    <p>• Processed Coconut Products</p>
                     <p>• Agri-Commodities</p>
                 </div>
             </div>
-            
-            <div class="highlight-box">
-                <h3>🤝 Strategic Partnerships</h3>
-                <p>Our established networks in Vietnam and Thailand enable us to offer diverse product portfolios and competitive pricing for Southeast Asian agricultural products.</p>
+
+            <div class="glass-card animate-on-scroll">
+                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">🤝 Strategic Partnerships</h3>
+                <p>Our established networks enable us to offer diverse product portfolios and competitive pricing for
+                    Southeast Asian agricultural products.</p>
             </div>
         </div>
 
-        <!-- Pricing & Service Options -->
+        <!-- Pricing & Service -->
         <div class="page">
-            <h1>💰 Pricing & Service Options</h1>
-            
-            <div class="pricing-table">
-                <h3>📋 Available Pricing Terms</h3>
-                <div class="pricing-row">
-                    <span><strong>Ex-Works (EXW)</strong></span>
-                    <span>Primary offering - Factory pickup</span>
-                </div>
-                <div class="pricing-row">
-                    <span><strong>FOB (Free on Board)</strong></span>
-                    <span>Port delivery included</span>
-                </div>
-                <div class="pricing-row">
-                    <span><strong>CIF (Cost, Insurance, Freight)</strong></span>
-                    <span>On request - Complete delivery</span>
-                </div>
-                <div class="pricing-row">
-                    <span><strong>Door-to-Door (DtoD)</strong></span>
-                    <span>Premium service - End delivery</span>
-                </div>
-            </div>
-            
-            <div class="highlight-box">
-                <h3>🎯 Service Flexibility</h3>
-                <p>We adapt our pricing and service model to match your business requirements and budget constraints, ensuring maximum value for your investment.</p>
-            </div>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>📦 MOQ Details</h3>
-                    <p><strong>Fresh Vegetables:</strong> 2-3 MT minimum</p>
-                    <p><strong>Air Cargo:</strong> Based on space availability</p>
-                    <p><strong>Bulk Orders:</strong> Up to 20 MT daily capacity</p>
-                    <p><strong>Flexibility:</strong> Buyer requirement based</p>
-                </div>
-                
-                <div class="product-card">
-                    <h3>🌍 Current Active Markets</h3>
-                    <p><strong>🇬🇧 United Kingdom:</strong> Weekly shipments</p>
-                    <p><strong>🇨🇦 Canada:</strong> Regular air cargo</p>
-                    <p><strong>🇦🇪 UAE (Dubai):</strong> Growing market</p>
-                    <p><strong>Expansion:</strong> Singapore, US, Europe</p>
-                </div>
-            </div>
-        </div>
+            <h1 class="animate-on-scroll">💰 Pricing & Service</h1>
 
-        <!-- Fast-Moving Products for Target Markets -->
-        <div class="page">
-            <h1>🚀 High-Volume Export Products</h1>
-            
-            <h2>🇸🇬 Singapore Market Focus</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>Top Exports to Singapore</h3>
-                    <p>• Basmati Rice & Non-Basmati varieties</p>
-                    <p>• Spices (Turmeric, Cumin, Coriander)</p>
-                    <p>• Tea (Black, Green, Flavored)</p>
-                    <p>• Cashews & Dry Fruits</p>
-                    <p>• Processed Foods & Snacks</p>
+            <div class="glass-card animate-on-scroll">
+                <div class="pricing-table">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 20px;">📋 Available Pricing Terms</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div
+                            style="display: flex; justify-content: space-between; padding: 10px; background: rgba(16, 185, 129, 0.05); border-radius: 8px;">
+                            <span><strong>Ex-Works (EXW)</strong></span>
+                            <span>Factory pickup</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; padding: 10px; background: rgba(16, 185, 129, 0.05); border-radius: 8px;">
+                            <span><strong>FOB</strong></span>
+                            <span>Port delivery</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; padding: 10px; background: rgba(16, 185, 129, 0.05); border-radius: 8px;">
+                            <span><strong>CIF</strong></span>
+                            <span>Complete shipping</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; padding: 10px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border: 1px solid var(--primary);">
+                            <span><strong>Door-to-Door</strong></span>
+                            <span>End-to-end service</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <h2>🇺🇸🇪🇺 US & European Markets</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>High-Demand Categories</h3>
-                    <p>• Organic & Health Foods</p>
-                    <p>• Millets & Ancient Grains</p>
-                    <p>• Ayurvedic & Natural Cosmetics</p>
-                    <p>• Textile & Leather Goods</p>
-                    <p>• Premium Spices & Herbs</p>
+
+            <div class="stats-grid animate-on-scroll">
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Global Support</div>
                 </div>
-                
-                <div class="product-card">
-                    <h3>Value-Added Products</h3>
-                    <p>• Ready-to-Cook Foods</p>
-                    <p>• Gluten-Free Alternatives</p>
-                    <p>• Natural Skincare Products</p>
-                    <p>• Sustainable Packaging Solutions</p>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Credit Terms</div>
                 </div>
             </div>
         </div>
@@ -699,12 +735,13 @@
         <!-- Partnership Opportunity -->
         <div class="page">
             <h1>🤝 Partnership Opportunity</h1>
-            
+
             <div class="highlight-box">
                 <h3>🎯 Cross-Trading Excellence</h3>
-                <p><strong>Singapore-US-Europe Triangle:</strong> Perfect positioning for cross-trading operations with established agent networks in US and European markets.</p>
+                <p><strong>Singapore-US-Europe Triangle:</strong> Perfect positioning for cross-trading operations with
+                    established agent networks in US and European markets.</p>
             </div>
-            
+
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">24/7</div>
@@ -719,7 +756,7 @@
                     <div class="stat-label">Years Experience</div>
                 </div>
             </div>
-            
+
             <div class="product-grid">
                 <div class="product-card">
                     <h3>🎁 What We Offer</h3>
@@ -729,7 +766,7 @@
                     <p>• Competitive margin structures</p>
                     <p>• Flexible payment terms</p>
                 </div>
-                
+
                 <div class="product-card">
                     <h3>🔍 What We Seek</h3>
                     <p>• Established distribution network</p>
@@ -743,73 +780,111 @@
 
         <!-- Contact & Next Steps -->
         <div class="page">
-            <h1>📞 Let's Connect</h1>
-            
-            <div class="cta-section">
-                <h2>🚀 Ready to Start Trading?</h2>
-                <p>Join hands with Ren Exports and unlock the potential of premium good products in global markets.</p>
-                <div style="margin: 30px 0;">
-                    <a href="#" class="btn">📧 Send Inquiry</a>
-                    <a href="#" class="btn">📱 Schedule Call</a>
-                    <a href="#" class="btn">📋 Request Quote</a>
+            <h1 class="animate-on-scroll">📞 Let's Connect</h1>
+
+            <div class="glass-card animate-on-scroll"
+                style="background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%); color: white; text-align: center;">
+                <h2 style="color: var(--primary); justify-content: center; margin-bottom: 15px;">🚀 Ready to Start
+                    Trading?</h2>
+                <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 30px;">Join hands with Ren Exports and unlock
+                    the potential of premium products in global markets.</p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="mailto:softwareprogrammer1@gmail.com" class="btn btn-primary">📧 Send Enquiry</a>
+                    <a href="https://wa.me/6582335378" target="_blank" class="btn btn-outline-white">📱 Schedule
+                        Call</a>
+                    <a href="#quote-form" class="btn btn-outline-white">📋 Request Quote</a>
                 </div>
             </div>
-            
-            <div class="highlight-box">
-                <h3>📍 Contact Information</h3>
-                <p><strong>Ren Exports</strong></p>
-                <p>📍 Singapore, Asia</p>
-                <p>🌐 Serving Global Markets</p>
-                <p>⏰ Business Hours: 24/7 Support Available</p>
-                <p>🚛 Shipping: Worldwide</p>
+
+            <div id="quote-form" class="quote-form animate-on-scroll">
+                <h3 style="color: var(--secondary); margin-bottom: 25px; text-align: center;">Request a Quote</h3>
+                <form action="mailto:softwareprogrammer1@gmail.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product">Product of Interest</label>
+                        <input type="text" id="product" name="product"
+                            placeholder="e.g. Premium Onions, Moringa Powder">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message / Requirements</label>
+                        <textarea id="message" name="message" rows="4"
+                            placeholder="Tell us about your volume and destination..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                </form>
             </div>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>🎯 Next Steps</h3>
-                    <p>1. Share your product requirements</p>
-                    <p>2. Receive detailed quotations</p>
-                    <p>3. Sample approval process</p>
-                    <p>4. Begin partnership journey</p>
-                </div>
-                
-                <div class="product-card">
-                    <h3>📋 Documents Ready</h3>
-                    <p>• Company certificates</p>
-                    <p>• Product specifications</p>
-                    <p>• Quality certifications</p>
-                    <p>• Reference testimonials</p>
+
+            <div class="glass-card animate-on-scroll">
+                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">📍 Contact Information</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div>
+                        <p><strong>Ren Exports</strong></p>
+                        <p>📍 Singapore, Asia</p>
+                        <p>🌐 Serving Global Markets</p>
+                    </div>
+                    <div>
+                        <p>⏰ 24/7 Support Available</p>
+                        <p>🚛 Worldwide Shipping</p>
+                        <p>📧 softwareprogrammer1@gmail.com</p>
+                    </div>
                 </div>
             </div>
-            
-            <div style="text-align: center; margin-top: 40px; color: #2E8B57;">
-                <h3>Thank You for Your Interest in Ren Exports</h3>
-                <p style="font-style: italic;">"Your Success is Our Victory"</p>
+
+            <div style="text-align: center; margin-top: 40px; color: var(--secondary);">
+                <h3 style="margin-bottom: 10px;">Thank You for Your Interest in Ren Exports</h3>
+                <p style="font-style: italic; color: var(--text-light);">"Your Success is Our Victory"</p>
             </div>
         </div>
     </div>
-    
+
+    <!-- Floating WhatsApp for Mobile -->
+    <a href="https://wa.me/6582335378" target="_blank"
+        style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 1000; text-decoration: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);"
+        onmouseover="this.style.transform='scale(1.1) translateY(-5px)'"
+        onmouseout="this.style.transform='scale(1) translateY(0)'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+        </svg>
+    </a>
+
     <script>
-        // Add smooth scrolling and fade-in animations
-        document.addEventListener('DOMContentLoaded', function() {
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Registered'))
+                    .catch(err => console.log('Service Worker Registration Failed', err));
+            });
+        }
+
+        // Intersection Observer for Scroll Animations
+        document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
-            
-            const observer = new IntersectionObserver(function(entries) {
+
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
+                        entry.target.classList.add('visible');
                     }
                 });
             }, observerOptions);
-            
-            // Observe all major sections
-            document.querySelectorAll('.product-card, .highlight-box, .stat-card').forEach(el => {
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
                 observer.observe(el);
             });
         });
     </script>
 </body>
+
 </html>

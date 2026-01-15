@@ -1,0 +1,23 @@
+{
+  "name": "Ren Exports",
+  "short_name": "RenExports",
+  "description": "Premium Products to Global Markets",
+  "start_url": "/Index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/parakeet/192/10b981/globe.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/parakeet/512/10b981/globe.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
