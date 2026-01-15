@@ -60,14 +60,18 @@
 
         .container {
             width: 100%;
-            padding: 0 20px;
+            max-width: 1200px;
+            /* Increased for fluid look on larger screens */
+            padding: 0 5vw;
+            /* Fluid side padding */
             margin: 0 auto;
             position: relative;
         }
 
         .page {
             min-height: 100vh;
-            padding: 60px 0;
+            padding: 10vh 0;
+            /* Fluid vertical padding */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -241,12 +245,22 @@
         /* Forms & Buttons */
         .quote-form {
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 24px;
-            max-width: 600px;
-            margin: 40px auto;
+            width: 100%;
+            max-width: 100%;
+            /* Mobile full width */
+            margin: 30px auto;
             box-shadow: var(--shadow);
             text-align: left;
+        }
+
+        @media (min-width: 768px) {
+            .quote-form {
+                max-width: 800px;
+                /* Widened for desktop */
+                padding: 50px;
+            }
         }
 
         .form-group {
@@ -349,15 +363,46 @@
             transform: translateY(0);
         }
 
+        /* Scroll to Top */
+        #scroll-top {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        #scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #scroll-top:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
         /* Large Screen Enhancements (Progressive) */
         @media (min-width: 768px) {
             .container {
-                max-width: 900px;
-                padding: 0;
+                padding: 0 30px;
             }
 
             .page {
-                padding: 100px 0;
+                padding: 8vh 0;
             }
 
             .company-logo {
@@ -369,17 +414,17 @@
             }
 
             h1 {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
 
             .product-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
+                gap: 30px;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 24px;
+                gap: 30px;
             }
 
             .btn {
@@ -388,13 +433,23 @@
             }
 
             .glass-card {
-                padding: 40px;
+                padding: 50px;
+            }
+
+            #scroll-top {
+                right: 30px;
+                bottom: 100px;
             }
         }
 
         @media (min-width: 1024px) {
             .product-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 40px;
+            }
+
+            .page {
+                padding: 10vh 0;
             }
         }
     </style>
@@ -855,7 +910,29 @@
         </svg>
     </a>
 
+    <!-- Scroll to Top -->
+    <button id="scroll-top" title="Scroll to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
     <script>
+        // Scroll to Top Logic
+        const scrollTopBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
         // PWA Service Worker Registration
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
